@@ -1,0 +1,146 @@
+@import url('https://fonts.cdnfonts.com/css/arcade-classic');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'ArcadeClassic', sans-serif;
+    box-sizing: border-box;
+
+}
+html {
+    height: 100%;
+}
+
+
+body{
+  height: 100%;
+  background: url(/imgs/background.png) center center no-repeat;
+  background-size: cover;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family:sans-serif;
+  margin:0;
+  overflow:hidden;
+}
+
+main {
+    position: relative;
+    display: flex;
+}
+
+
+#title-starter-page {  
+  text-align: center;
+  cursor: pointer;
+}
+
+#title-starter-page a{
+  display:block;
+  font-size:3em;
+  color:#333;
+  font-weight:800;
+  text-decoration:none;
+  background:rgba(0,0,40,0);
+  padding:5px 15px;
+  transition:0.50s
+}
+#title-starter-page:hover a{  
+  color:rgb(0, 0, 0);
+  text-shadow:2px 5px 0 rgba(0, 0, 0, 0.6) 
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    display: flex;
+    text-align: center;
+    position: relative;
+}
+
+.player-1-section,
+.player-2-section {
+    height: 80vh;
+    border-radius: 25px;
+    padding-left: 10vmin;
+    padding-right: 10vmin;   
+    position: relative;
+}
+.player-2-bottom,
+.player-1-bottom
+ {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    text-align: center;
+    align-items: center;
+ }
+
+ .player-1-bottom {
+    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.432) 3%, rgba(236, 6, 106, 0.5) 100%);
+    color: rgb(206, 94, 187);
+    border-radius: 10px;
+    padding: 5px;
+ }
+
+.player-1-section {
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 3%, rgba(238, 84, 202, 0.5) 100%);
+    color: rgb(124, 8, 85);
+}
+
+.player-2-section {
+    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 3%, rgba(248, 77, 134, 0.5) 100%);
+}
+
+.player-1-heading {
+    font-size: 60px;
+    margin-bottom: 50px;
+}
+.player-1-score {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+.player-score-count {
+    font-size: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ .buttons-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    text-align: center;
+    align-items: center;
+    
+ }
+
+ button {
+    cursor: pointer;
+ }
+
+
+
+
