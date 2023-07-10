@@ -55,8 +55,10 @@ hideStarterPage.addEventListener('click', function(){
 */
 
 /*----- selecting elements -----*/
-const player1SectionEl = document.querySelector('.player-1-section')
-const player2SectionEl = document.querySelector('.player-2-section')
+const player1SectionEl = document.querySelector('.player-1-section');
+const player2SectionEl = document.querySelector('.player-2-section');
+const player1HeadingEl = document.querySelector('.player-1-heading');
+const player2HeadingEl = document.querySelector('.player-2-heading');
 const player1ScoreEl = document.querySelector('.player-score-count');
 const player2ScoreEl = document.querySelector('.player-2-score-count');
 const player1CurrentScoreEl = document.querySelector('.player-1-current-score-count');
@@ -65,7 +67,10 @@ const diceEl = document.querySelector('.dice');
 const rollButton = document.querySelector('.roll-btn');
 const holdButton = document.querySelector('.hold-btn');
 const newGameButton = document.querySelector('.new-game-btn');
+
 /*----- constants -----*/
+
+
 const DICE_LOOKUP = {
   dice1:  {img: 'imgs/dice-1.png', points: 0 },
   dice2:  {img: 'imgs/dice-2.png', points: 2 },
@@ -76,17 +81,22 @@ const DICE_LOOKUP = {
 }
 const player1 = {
     sectionEl: player1SectionEl,
+    headingEl: player1HeadingEl,
+    scoreEl: player1ScoreEl,
     currentScoreEl: player1CurrentScoreEl
 }
 
 const player2 = {
   sectionEl: player2SectionEl,
+  headingEl: player2HeadingEl,
+  scoreEl: player2ScoreEl,
   currentScoreEl: player2CurrentScoreEl
 }
 
 
 /*----- initialising current player-----*/
 let currentPlayer = player1;
+
 
 /*----- Starting conditions -----*/
 player1ScoreEl.textContent = 0;
@@ -95,13 +105,23 @@ player1CurrentScoreEl.textContent = 0;
 player2CurrentScoreEl.textContent = 0;
 diceEl.classList.add('hidden');
 
+/*----- Winning function -----*/
+
+  
+
 /*----- Rolling dice functionality -----*/
 
   function getRandomDICE() {
-  const dice = Object.keys(DICE_LOOKUP);
-  const randomIdx = Math.floor(Math.random() * dice.length);
-  return dice[randomIdx];
-}
+    const dice = Object.keys(DICE_LOOKUP);
+    if (Math.random() < 0.3) {
+      return dice[0]; // Return first index with 30% probability
+    } else {
+      const randomIdx = Math.floor(Math.random() * (dice.length - 1)) + 1; 
+      return dice[randomIdx];
+    }
+  }
+/*----- end game -----*/
+  let gameEnd = false;
 
 rollButton.addEventListener('click', function() {
 
@@ -113,6 +133,7 @@ rollButton.addEventListener('click', function() {
     diceEl.src = diceImg;
     const rolledDice = DICE_LOOKUP[randomDice].points;
     currentPlayer.currentScoreEl.textContent = Number(currentPlayer.currentScoreEl.textContent) + rolledDice;
+ 
     const resetDice = DICE_LOOKUP.dice1.img;
 
     if ( diceImg === resetDice) {
@@ -121,17 +142,36 @@ rollButton.addEventListener('click', function() {
       currentPlayer = (currentPlayer === player1) ? player2 : player1;
       currentPlayer.sectionEl.classList.add('current-turn-effect');
     } 
-    
+
 });
 
+
 /*----- Hold dice functionality -----*/
+holdButton.addEventListener('click', function() {
+  currentPlayer.scoreEl.textContent = Number(currentPlayer.scoreEl.textContent) + Number(currentPlayer.currentScoreEl.textContent);
+  currentPlayer.currentScoreEl.textContent = 0;
 
+  currentPlayer.sectionEl.classList.remove('current-turn-effect');
+  currentPlayer = (currentPlayer === player1) ? player2 : player1;
+  currentPlayer.sectionEl.classList.add('current-turn-effect');
 
+  if (parseInt(currentPlayer.scoreEl.textContent, 10) >= 10) {
+    currentPlayer.headingEl.textContent = "WINNER!";
+    disableButtons();
+  } else {
+    currentPlayer.sectionEl.classList.remove('current-turn-effect');
+    currentPlayer = (currentPlayer === player1) ? player2 : player1;
 
+    if (parseInt(currentPlayer.scoreEl.textContent, 10) >= 10) {
+      currentPlayer.headingEl.textContent = "WINNER!";
+      disableButtons();
+    } else {
+      currentPlayer.sectionEl.classList.add('current-turn-effect');
+    }
+  }
+});
 
-
-
-
-
-
-
+function disableButtons() {
+  rollButton.disabled = true;
+  holdButton.disabled = true;
+}
