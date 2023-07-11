@@ -75,12 +75,12 @@ const newGameButton = document.querySelector(".new-game-btn");
 
 /*----- constants -----*/
 const DICE_LOOKUP = {
-  dice1: { img: "imgs/dice-1.png", points: 0 },
-  dice2: { img: "imgs/dice-2.png", points: 2 },
-  dice3: { img: "imgs/dice-3.png", points: 3 },
-  dice4: { img: "imgs/dice-4.png", points: 4 },
-  dice5: { img: "imgs/dice-5.png", points: 5 },
-  dice6: { img: "imgs/dice-6.png", points: 6 },
+  dice1: { img: "./imgs/dice-1.png", points: 0 },
+  dice2: { img: "./imgs/dice-2.png", points: 2 },
+  dice3: { img: "./imgs/dice-3.png", points: 3 },
+  dice4: { img: "./imgs/dice-4.png", points: 4 },
+  dice5: { img: "./imgs/dice-5.png", points: 5 },
+  dice6: { img: "./imgs/dice-6.png", points: 6 },
 };
 
 const player1 = {
