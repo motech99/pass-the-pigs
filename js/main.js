@@ -63,14 +63,14 @@ const player1ScoreEl = document.querySelector('.player-score-count');
 const player2ScoreEl = document.querySelector('.player-2-score-count');
 const player1CurrentScoreEl = document.querySelector('.player-1-current-score-count');
 const player2CurrentScoreEl = document.querySelector('.player-2-current-score-count');
+const player1BottomEl = document.querySelector('.player-1-bottom')
+const player2BottomEl = document.querySelector('.player-2-bottom')
 const diceEl = document.querySelector('.dice');
 const rollButton = document.querySelector('.roll-btn');
 const holdButton = document.querySelector('.hold-btn');
 const newGameButton = document.querySelector('.new-game-btn');
 
 /*----- constants -----*/
-
-
 const DICE_LOOKUP = {
   dice1:  {img: 'imgs/dice-1.png', points: 0 },
   dice2:  {img: 'imgs/dice-2.png', points: 2 },
@@ -79,6 +79,7 @@ const DICE_LOOKUP = {
   dice5:  {img: 'imgs/dice-5.png', points: 5 },
   dice6:  {img: 'imgs/dice-6.png', points: 6 },
 }
+
 const player1 = {
     sectionEl: player1SectionEl,
     headingEl: player1HeadingEl,
@@ -93,11 +94,9 @@ const player2 = {
   currentScoreEl: player2CurrentScoreEl
 }
 
-
 /*----- initialising current player-----*/
 let currentPlayer = player1;
-
-
+let bothplayers = [player1, player2];
 /*----- Starting conditions -----*/
 player1ScoreEl.textContent = 0;
 player2ScoreEl.textContent = 0;
@@ -106,23 +105,56 @@ player2CurrentScoreEl.textContent = 0;
 diceEl.classList.add('hidden');
 
 /*----- Winning function -----*/
+function winner() {
+  rollButton.style.visibility = 'hidden';
+  holdButton.style.visibility = 'hidden';
+  diceEl.style.visibility = 'hidden';
+  player1CurrentScoreEl.style.visibility = 'hidden';
+  player2CurrentScoreEl.style.visibility = 'hidden';
+  player1BottomEl.style.visibility = 'hidden';
+  player2BottomEl.style.visibility = 'hidden';
 
-  
+  player1ScoreEl.style.visibility = 'visible';
+  player2ScoreEl.style.visibility = 'visible';
+  currentPlayer.headingEl.style.visibility = 'visible';
+}
 
+/*----- New Game function -----*/
+  function newGame() {
+  rollButton.style.visibility = 'visible';
+  holdButton.style.visibility = 'visible';
+  diceEl.style.visibility = 'visible';
+  player1CurrentScoreEl.style.visibility = 'visible';
+  player2CurrentScoreEl.style.visibility = 'visible';
+  player1BottomEl.style.visibility = 'visible';
+  player2BottomEl.style.visibility = 'visible';
+  }
+
+
+
+
+function disableButtons() {
+  rollButton.disabled = true;
+  holdButton.disabled = true;
+}
+
+function enableButtons() {
+  rollButton.disabled = false;
+  holdButton.disabled = false;
+}
 /*----- Rolling dice functionality -----*/
 
   function getRandomDICE() {
     const dice = Object.keys(DICE_LOOKUP);
-    if (Math.random() < 0.3) {
+    if (Math.random() < 0.1) {
       return dice[0]; // Return first index with 30% probability
     } else {
       const randomIdx = Math.floor(Math.random() * (dice.length - 1)) + 1; 
       return dice[randomIdx];
     }
   }
-/*----- end game -----*/
-  let gameEnd = false;
 
+/*----- Roll Button functionality -----*/
 rollButton.addEventListener('click', function() {
 
     diceEl.classList.remove('hidden');
@@ -145,33 +177,33 @@ rollButton.addEventListener('click', function() {
 
 });
 
-
-/*----- Hold dice functionality -----*/
+/*----- Hold Button functionality -----*/
 holdButton.addEventListener('click', function() {
+
   currentPlayer.scoreEl.textContent = Number(currentPlayer.scoreEl.textContent) + Number(currentPlayer.currentScoreEl.textContent);
   currentPlayer.currentScoreEl.textContent = 0;
 
-  currentPlayer.sectionEl.classList.remove('current-turn-effect');
-  currentPlayer = (currentPlayer === player1) ? player2 : player1;
-  currentPlayer.sectionEl.classList.add('current-turn-effect');
-
   if (parseInt(currentPlayer.scoreEl.textContent, 10) >= 10) {
     currentPlayer.headingEl.textContent = "WINNER!";
+    winner();
     disableButtons();
   } else {
     currentPlayer.sectionEl.classList.remove('current-turn-effect');
     currentPlayer = (currentPlayer === player1) ? player2 : player1;
-
-    if (parseInt(currentPlayer.scoreEl.textContent, 10) >= 10) {
-      currentPlayer.headingEl.textContent = "WINNER!";
-      disableButtons();
-    } else {
-      currentPlayer.sectionEl.classList.add('current-turn-effect');
-    }
-  }
+    currentPlayer.sectionEl.classList.add('current-turn-effect');
+  } 
 });
-
-function disableButtons() {
-  rollButton.disabled = true;
-  holdButton.disabled = true;
-}
+/*----- Hold Button functionality -----*/
+newGameButton.addEventListener('click', function() {
+  newGame();
+  enableButtons();
+    currentPlayer.sectionEl.classList.remove('current-turn-effect');
+    currentPlayer.scoreEl.textContent = 0;
+    if (currentPlayer.headingEl.textContent === "WINNER!") {
+      player1.headingEl.textContent = "player 1";
+      player2.headingEl.textContent = "player 2";
+      
+      
+    }
+    
+});

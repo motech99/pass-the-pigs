@@ -51,15 +51,15 @@ main {
   text-shadow:2px 5px 0 rgba(0, 0, 0, 0.6) 
 }
 
-.hidden {
-    display: none;
-}
-
 .container {
     display: flex;
     text-align: center;
     position: relative;
 }
+
+.hidden {
+    display: none;
+  }
 
 .player-1-section,
 .player-2-section {
