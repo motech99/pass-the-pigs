@@ -1,7 +1,7 @@
 'use strict';
 
 // ---  MAIN SCREEN CODE --- 
-/*
+
 // Selecting elements
 const start = document.querySelector('#title-starter-page');
 const startButton = start.querySelector('a');
@@ -46,13 +46,15 @@ start.addEventListener('mouseout', () => {
 //  ---  CODE AFTER MAIN SCREEN --- 
 const hideStarterPage = document.getElementById('title-starter-page');
 const bodyBackground = document.querySelector('body');
+const mainMenu = document.querySelector('main');
 
 hideStarterPage.addEventListener('click', function(){
     hideStarterPage.classList.add('hidden');
-    bodyBackground.style.backgroundImage = "url('imgs/background.png')";
+    mainMenu.classList.remove('hidden');
+    
     
 });
-*/
+
 
 /*----- selecting elements -----*/
 const player1SectionEl = document.querySelector('.player-1-section');
@@ -129,8 +131,15 @@ function winner() {
   player1BottomEl.style.visibility = 'visible';
   player2BottomEl.style.visibility = 'visible';
   }
-
-
+/*----- Reset function -----*/
+function resetValues() {
+  player1.headingEl.textContent = "player 1";
+  player2.headingEl.textContent = "player 2";
+  player1.scoreEl.textContent = 0;
+  player2.scoreEl.textContent = 0;
+  player1.currentScoreEl.textContent = 0;
+  player2.currentScoreEl.textContent = 0;
+}
 
 
 function disableButtons() {
@@ -146,8 +155,10 @@ function enableButtons() {
 
   function getRandomDICE() {
     const dice = Object.keys(DICE_LOOKUP);
-    if (Math.random() < 0.1) {
-      return dice[0]; // Return first index with 30% probability
+    // made it harder to play the game as 
+    // there is a low chance of landing on 1
+    if (Math.random() < 0) {
+      return dice[0]; 
     } else {
       const randomIdx = Math.floor(Math.random() * (dice.length - 1)) + 1; 
       return dice[randomIdx];
@@ -183,7 +194,7 @@ holdButton.addEventListener('click', function() {
   currentPlayer.scoreEl.textContent = Number(currentPlayer.scoreEl.textContent) + Number(currentPlayer.currentScoreEl.textContent);
   currentPlayer.currentScoreEl.textContent = 0;
 
-  if (parseInt(currentPlayer.scoreEl.textContent, 10) >= 10) {
+  if (parseInt(currentPlayer.scoreEl.textContent) >= 100) {
     currentPlayer.headingEl.textContent = "WINNER!";
     winner();
     disableButtons();
@@ -200,10 +211,10 @@ newGameButton.addEventListener('click', function() {
     currentPlayer.sectionEl.classList.remove('current-turn-effect');
     currentPlayer.scoreEl.textContent = 0;
     if (currentPlayer.headingEl.textContent === "WINNER!") {
-      player1.headingEl.textContent = "player 1";
-      player2.headingEl.textContent = "player 2";
-      
-      
+        resetValues();
+        currentPlayer = player1;
+    } else {
+      resetValues();
+      currentPlayer = player1;
     }
-    
 });
