@@ -204,7 +204,7 @@ holdButton.addEventListener("click", function () {
     currentPlayer.sectionEl.classList.add("current-turn-effect");
   }
 });
-/*----- Hold Button functionality -----*/
+/*----- New Game functionality -----*/
 newGameButton.addEventListener("click", function () {
   newGame();
   enableButtons();
