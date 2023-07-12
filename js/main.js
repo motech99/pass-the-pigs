@@ -142,7 +142,7 @@ function resetValues() {
   player2.currentScoreEl.textContent = 0;
 }
 
-/*----- Dice Img reset function -----*/
+/*----- Dice Image reset function -----*/
   function diceImgReset () {
     diceEl.style.visibility = 'visible';
   }
