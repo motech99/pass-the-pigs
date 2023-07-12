@@ -6,13 +6,14 @@
   font-family: "ArcadeClassic", sans-serif;
   box-sizing: border-box;
 }
+
 html {
   height: 100%;
 }
 
 body {
   height: 100%;
-  background: url(./imgs/background-main.png) center;
+  background: url(https://raw.githubusercontent.com/motech99/pass-the-pigs/main/imgs/background-main.png) center;
   background-size: cover;
   font-size: 40px;
   display: flex;
@@ -108,6 +109,7 @@ main {
   border-radius: 10px;
   padding: 8px;
 }
+
 .player-2-bottom {
   background: rgba(0, 0, 0, 0.5);
   background: linear-gradient(
@@ -124,6 +126,7 @@ main {
   font-size: 60px;
   margin-bottom: 50px;
 }
+
 .player-1-score {
   font-size: 60px;
   margin-bottom: 10px;
@@ -133,6 +136,7 @@ main {
   font-size: 60px;
   margin-bottom: 50px;
 }
+
 .player-1-score-count {
   font-size: 40px;
 }
@@ -182,4 +186,41 @@ img {
   bottom: 55%;
   left: 50%;
   transform: translate(-50%, 50%);
+}
+
+@media only screen and (max-width: 600px) {
+    #title-starter-page  {
+    font-size: 30px;
+   }
+   .player-1-heading {
+    font-size: 40px;
+    margin-bottom: 0px;
+   }
+   .player-1-score {
+    font-size: 40px;
+    margin-top: 100px;
+   }
+   .player-1-bottom {
+    font-size: 30px;
+   }
+   .player-2-heading {
+    font-size: 40px;
+    margin-bottom: 0px;
+   }
+   .player-2-score {
+    font-size: 40px;
+    margin-top: 100px;
+   }
+   .player-2-bottom {
+    font-size: 30px;
+
+   }
+   .dice {
+    width: 200px;
+    height: 200px;
+    
+   }
+    button {
+        font-size: 20px;
+    }
 }

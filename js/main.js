@@ -75,12 +75,12 @@ const newGameButton = document.querySelector(".new-game-btn");
 
 /*----- constants -----*/
 const DICE_LOOKUP = {
-  dice1: { img: "imgs/dice-1.png", points: 0 },
-  dice2: { img: "imgs/dice-2.png", points: 2 },
-  dice3: { img: "imgs/dice-3.png", points: 3 },
-  dice4: { img: "imgs/dice-4.png", points: 4 },
-  dice5: { img: "imgs/dice-5.png", points: 5 },
-  dice6: { img: "imgs/dice-6.png", points: 6 },
+  dice1: { img: "./imgs/dice-1.png", points: 0 },
+  dice2: { img: "./imgs/dice-2.png", points: 2 },
+  dice3: { img: "./imgs/dice-3.png", points: 3 },
+  dice4: { img: "./imgs/dice-4.png", points: 4 },
+  dice5: { img: "./imgs/dice-5.png", points: 5 },
+  dice6: { img: "./imgs/dice-6.png", points: 6 },
 };
 
 const player1 = {
@@ -99,7 +99,7 @@ const player2 = {
 
 /*----- initialising current player-----*/
 let currentPlayer = player1;
-let bothplayers = [player1, player2];
+
 /*----- Starting conditions -----*/
 player1ScoreEl.textContent = 0;
 player2ScoreEl.textContent = 0;
@@ -179,7 +179,6 @@ rollButton.addEventListener("click", function () {
     Number(currentPlayer.currentScoreEl.textContent) + rolledDice;
 
   const resetDice = DICE_LOOKUP.dice1.img;
-
   if (diceImg === resetDice) {
     currentPlayer.currentScoreEl.textContent = 0;
     currentPlayer.sectionEl.classList.remove("current-turn-effect");
@@ -205,7 +204,8 @@ holdButton.addEventListener("click", function () {
     currentPlayer.sectionEl.classList.add("current-turn-effect");
   }
 });
-/*----- Hold Button functionality -----*/
+
+/*----- New Game functionality -----*/
 newGameButton.addEventListener("click", function () {
   newGame();
   enableButtons();
