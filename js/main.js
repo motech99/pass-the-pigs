@@ -99,7 +99,7 @@ const player2 = {
 
 /*----- initialising current player-----*/
 let currentPlayer = player1;
-
+let bothplayers = [player1, player2];
 /*----- Starting conditions -----*/
 player1ScoreEl.textContent = 0;
 player2ScoreEl.textContent = 0;
@@ -171,20 +171,21 @@ rollButton.addEventListener("click", function () {
   diceEl.classList.remove("hidden");
   currentPlayer.sectionEl.classList.add("current-turn-effect");
 
-  const randomDice = getRandomDICE();
-  const diceImg = DICE_LOOKUP[randomDice].img;
-  diceEl.src = diceImg;
-  const rolledDice = DICE_LOOKUP[randomDice].points;
-  currentPlayer.currentScoreEl.textContent =
-    Number(currentPlayer.currentScoreEl.textContent) + rolledDice;
+    const randomDice = getRandomDICE();
+    const diceImg = DICE_LOOKUP[randomDice].img;
+    diceEl.src = diceImg;
+    const rolledDice = DICE_LOOKUP[randomDice].points;
+    currentPlayer.currentScoreEl.textContent = Number(currentPlayer.currentScoreEl.textContent) + rolledDice;
+ 
+    const resetDice = DICE_LOOKUP.dice1.img;
 
-  const resetDice = DICE_LOOKUP.dice1.img;
-  if (diceImg === resetDice) {
-    currentPlayer.currentScoreEl.textContent = 0;
-    currentPlayer.sectionEl.classList.remove("current-turn-effect");
-    currentPlayer = currentPlayer === player1 ? player2 : player1;
-    currentPlayer.sectionEl.classList.add("current-turn-effect");
-  }
+    if ( diceImg === resetDice) {
+      currentPlayer.currentScoreEl.textContent = 0;
+      currentPlayer.sectionEl.classList.remove('current-turn-effect');
+      currentPlayer = (currentPlayer === player1) ? player2 : player1;
+      currentPlayer.sectionEl.classList.add('current-turn-effect');
+    } 
+
 });
 
 /*----- Hold Button functionality -----*/
@@ -204,9 +205,8 @@ holdButton.addEventListener("click", function () {
     currentPlayer.sectionEl.classList.add("current-turn-effect");
   }
 });
-
-/*----- New Game functionality -----*/
-newGameButton.addEventListener("click", function () {
+/*----- Hold Button functionality -----*/
+newGameButton.addEventListener('click', function() {
   newGame();
   enableButtons();
   currentPlayer.sectionEl.classList.remove("current-turn-effect");

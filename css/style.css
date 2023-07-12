@@ -6,7 +6,6 @@
   font-family: "ArcadeClassic", sans-serif;
   box-sizing: border-box;
 }
-
 html {
   height: 100%;
 }
@@ -109,7 +108,6 @@ main {
   border-radius: 10px;
   padding: 8px;
 }
-
 .player-2-bottom {
   background: rgba(0, 0, 0, 0.5);
   background: linear-gradient(
