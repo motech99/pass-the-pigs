@@ -20,7 +20,7 @@ The objective of this game is to be the first player to reach **100 points**. In
 6. If you reach 100 points or more, you win the game!
 7. The game continues until a player reaches the winning score.
 
-Remember, don't get too greedy and risk losing your accumulated points by rolling a one. Good luck and enjoy playing Pass the Pigs!
+Remember, don't get too greedy and risk losing your accumulated points by rolling a one. Good luck and enjoy playing <span style="color:pink">**Pass the Pigs!**</span>
 
 
 ## Attributions
