@@ -99,7 +99,6 @@ const player2 = {
 
 /*----- initialising current player-----*/
 let currentPlayer = player1;
-let bothplayers = [player1, player2];
 /*----- Starting conditions -----*/
 player1ScoreEl.textContent = 0;
 player2ScoreEl.textContent = 0;
@@ -126,12 +125,13 @@ function winner() {
 function newGame() {
   rollButton.style.visibility = "visible";
   holdButton.style.visibility = "visible";
-  diceEl.style.visibility = "visible";
+  diceEl.style.visibility = "hidden";
   player1CurrentScoreEl.style.visibility = "visible";
   player2CurrentScoreEl.style.visibility = "visible";
   player1BottomEl.style.visibility = "visible";
   player2BottomEl.style.visibility = "visible";
 }
+
 /*----- Reset function -----*/
 function resetValues() {
   player1.headingEl.textContent = "player 1";
@@ -141,6 +141,11 @@ function resetValues() {
   player1.currentScoreEl.textContent = 0;
   player2.currentScoreEl.textContent = 0;
 }
+
+/*----- Dice Img reset function -----*/
+  function diceImgReset () {
+    diceEl.style.visibility = 'visible';
+  }
 
 /*----- disable/Enable Buttons function -----*/
 function disableButtons() {
@@ -168,6 +173,7 @@ function getRandomDICE() {
 
 /*----- Roll Button functionality -----*/
 rollButton.addEventListener("click", function () {
+  diceImgReset(); 
   diceEl.classList.remove("hidden");
   currentPlayer.sectionEl.classList.add("current-turn-effect");
 
@@ -189,7 +195,8 @@ rollButton.addEventListener("click", function () {
 });
 
 /*----- Hold Button functionality -----*/
-holdButton.addEventListener("click", function () {
+holdButton.addEventListener('click', function () {
+  diceImgReset(); 
   currentPlayer.scoreEl.textContent =
     Number(currentPlayer.scoreEl.textContent) +
     Number(currentPlayer.currentScoreEl.textContent);
@@ -205,8 +212,8 @@ holdButton.addEventListener("click", function () {
     currentPlayer.sectionEl.classList.add("current-turn-effect");
   }
 });
-/*----- Hold Button functionality -----*/
-newGameButton.addEventListener('click', function() {
+/*----- New Game functionality -----*/
+newGameButton.addEventListener('click', function () {
   newGame();
   enableButtons();
   currentPlayer.sectionEl.classList.remove("current-turn-effect");
@@ -214,8 +221,10 @@ newGameButton.addEventListener('click', function() {
   if (currentPlayer.headingEl.textContent === "WINNER!") {
     resetValues();
     currentPlayer = player1;
+  
   } else {
     resetValues();
     currentPlayer = player1;
   }
 });
+
