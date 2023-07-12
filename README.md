@@ -25,9 +25,9 @@ Remember, don't get too greedy and risk losing your accumulated points by rollin
 
 ## Attributions
  
- Pixel art vacation background pikisuperstar on Freepik. 
+ - Pixel art vacation background pikisuperstar on Freepik. 
  Licensed under Free license. Source: <a href="https://www.freepik.com/free-vector/pixel-art-vacation-background_29019073.htm#query=pixel%20background&position=2&from_view=search&track=ais">Image by pikisuperstar</a> 
 
-Flat farm animal collection by freepik. Licensed under free license. Source: Image by <a href="https://www.freepik.com/free-vector/flat-farm-animal-collection_4549863.htm#query=pig%20pixel&position=0&from_view=keyword&track=ais">Freepik</a>
+- Flat farm animal collection by freepik. Licensed under free license. Source: Image by <a href="https://www.freepik.com/free-vector/flat-farm-animal-collection_4549863.htm#query=pig%20pixel&position=0&from_view=keyword&track=ais">Freepik</a>
 
 - Font used: Arcade Classic Font Family by cdnfonts. Licensed under *unknown*. Source: <a href="https://www.cdnfonts.com/arcade-classic.font">Arcade Classic Font Family</a>
