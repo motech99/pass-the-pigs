@@ -15,7 +15,7 @@ can be found in the about section or here: <a href="https://motech99.github.io/p
 4. The number rolled on the dice will be added to your current score.
 
 5. You can continue rolling the dice to accumulate points until:
-  * You choose to "Hold" your current score and pass your turn to the next player, or
+  * You choose to "Hold" your current score this will be added to the top and pass your turn to the next player, or
 
   * You roll a one, which resets your current score to 0, and it becomes the next player's turn.
 
