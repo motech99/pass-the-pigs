@@ -43,6 +43,7 @@ main {
   padding: 5px 15px;
   transition: 0.5s;
 }
+
 #title-starter-page:hover a {
   color: rgb(0, 0, 0);
   text-shadow: 2px 5px 0 rgba(0, 0, 0, 0.6);
@@ -143,6 +144,8 @@ main {
   transition: transform 0.2s ease;
   border: 5px solid black;
   transform: scale(1.1);
+  margin-right: 18px;
+  margin-left: 18px;
 }
 
 .buttons-container {

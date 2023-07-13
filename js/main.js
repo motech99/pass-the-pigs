@@ -1,6 +1,6 @@
 "use strict";
 
-// ---  MAIN SCREEN CODE ---
+/*----- MAIN SCREEN CODE -----*/
 
 // Selecting elements
 const start = document.querySelector("#title-starter-page");
@@ -41,9 +41,7 @@ start.addEventListener("mouseout", () => {
   startButton.style.color = "white";
 });
 
-//  ---  MAIN SCREEN CODE ---
-
-//  ---  CODE AFTER MAIN SCREEN ---
+/*----- MAIN SCREEN CODE -----*/
 const hideStarterPage = document.getElementById("title-starter-page");
 const bodyBackground = document.querySelector("body");
 const mainMenu = document.querySelector("main");
@@ -52,6 +50,7 @@ hideStarterPage.addEventListener("click", function () {
   hideStarterPage.classList.add("hidden");
   mainMenu.classList.remove("hidden");
 });
+/*----- CODE AFTER MAIN SCREEN -----*/
 
 /*----- selecting elements -----*/
 const player1SectionEl = document.querySelector(".player-1-section");
@@ -143,9 +142,9 @@ function resetValues() {
 }
 
 /*----- Dice Image reset function -----*/
-  function diceImgReset () {
-    diceEl.style.visibility = 'visible';
-  }
+function diceImgReset() {
+  diceEl.style.visibility = "visible";
+}
 
 /*----- disable/Enable Buttons function -----*/
 function disableButtons() {
@@ -173,30 +172,29 @@ function getRandomDICE() {
 
 /*----- Roll Button functionality -----*/
 rollButton.addEventListener("click", function () {
-  diceImgReset(); 
+  diceImgReset();
   diceEl.classList.remove("hidden");
   currentPlayer.sectionEl.classList.add("current-turn-effect");
 
-    const randomDice = getRandomDICE();
-    const diceImg = DICE_LOOKUP[randomDice].img;
-    diceEl.src = diceImg;
-    const rolledDice = DICE_LOOKUP[randomDice].points;
-    currentPlayer.currentScoreEl.textContent = Number(currentPlayer.currentScoreEl.textContent) + rolledDice;
- 
-    const resetDice = DICE_LOOKUP.dice1.img;
+  const randomDice = getRandomDICE();
+  const diceImg = DICE_LOOKUP[randomDice].img;
+  diceEl.src = diceImg;
+  const rolledDice = DICE_LOOKUP[randomDice].points;
+  currentPlayer.currentScoreEl.textContent =
+    Number(currentPlayer.currentScoreEl.textContent) + rolledDice;
 
-    if ( diceImg === resetDice) {
-      currentPlayer.currentScoreEl.textContent = 0;
-      currentPlayer.sectionEl.classList.remove('current-turn-effect');
-      currentPlayer = (currentPlayer === player1) ? player2 : player1;
-      currentPlayer.sectionEl.classList.add('current-turn-effect');
-    } 
-
+  const resetDice = DICE_LOOKUP.dice1.img;
+  if (diceImg === resetDice) {
+    currentPlayer.currentScoreEl.textContent = 0;
+    currentPlayer.sectionEl.classList.remove("current-turn-effect");
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+    currentPlayer.sectionEl.classList.add("current-turn-effect");
+  }
 });
 
 /*----- Hold Button functionality -----*/
-holdButton.addEventListener('click', function () {
-  diceImgReset(); 
+holdButton.addEventListener("click", function () {
+  diceImgReset();
   currentPlayer.scoreEl.textContent =
     Number(currentPlayer.scoreEl.textContent) +
     Number(currentPlayer.currentScoreEl.textContent);
@@ -212,8 +210,9 @@ holdButton.addEventListener('click', function () {
     currentPlayer.sectionEl.classList.add("current-turn-effect");
   }
 });
+
 /*----- New Game functionality -----*/
-newGameButton.addEventListener('click', function () {
+newGameButton.addEventListener("click", function () {
   newGame();
   enableButtons();
   currentPlayer.sectionEl.classList.remove("current-turn-effect");
@@ -221,10 +220,8 @@ newGameButton.addEventListener('click', function () {
   if (currentPlayer.headingEl.textContent === "WINNER!") {
     resetValues();
     currentPlayer = player1;
-  
   } else {
     resetValues();
     currentPlayer = player1;
   }
 });
-
