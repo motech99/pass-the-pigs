@@ -43,7 +43,6 @@ start.addEventListener("mouseout", () => {
 
 /*----- MAIN SCREEN CODE -----*/
 const hideStarterPage = document.getElementById("title-starter-page");
-const bodyBackground = document.querySelector("body");
 const mainMenu = document.querySelector("main");
 
 hideStarterPage.addEventListener("click", function () {
@@ -74,12 +73,12 @@ const newGameButton = document.querySelector(".new-game-btn");
 
 /*----- constants -----*/
 const DICE_LOOKUP = {
-  dice1: { img: "./imgs/dice-1.png", points: 0 },
-  dice2: { img: "./imgs/dice-2.png", points: 2 },
-  dice3: { img: "./imgs/dice-3.png", points: 3 },
-  dice4: { img: "./imgs/dice-4.png", points: 4 },
-  dice5: { img: "./imgs/dice-5.png", points: 5 },
-  dice6: { img: "./imgs/dice-6.png", points: 6 },
+  dice1: { img: "./images/dice-1.png", points: 0 },
+  dice2: { img: "./images/dice-2.png", points: 2 },
+  dice3: { img: "./images/dice-3.png", points: 3 },
+  dice4: { img: "./images/dice-4.png", points: 4 },
+  dice5: { img: "./images/dice-5.png", points: 5 },
+  dice6: { img: "./images/dice-6.png", points: 6 },
 };
 
 const player1 = {
@@ -129,6 +128,10 @@ function newGame() {
   player2CurrentScoreEl.style.visibility = "visible";
   player1BottomEl.style.visibility = "visible";
   player2BottomEl.style.visibility = "visible";
+
+  // Reset button state
+  rollButton.disabled = false;
+  rollButton.classList.remove("disabled");
 }
 
 /*----- Reset function -----*/
@@ -148,7 +151,8 @@ function diceImgReset() {
 
 /*----- Dice Image reset function -----*/
 function diceImgScoreReset() {
-  diceEl.style.visibility = "hidden";
+  diceEl.src = "./images/dice-0.png";
+  diceEl.style.visibility = "visible";
 }
 
 /*----- disable/Enable Buttons function -----*/
@@ -161,6 +165,7 @@ function enableButtons() {
   rollButton.disabled = false;
   holdButton.disabled = false;
 }
+
 /*----- Rolling dice functionality -----*/
 
 function getRandomDICE() {
@@ -175,8 +180,23 @@ function getRandomDICE() {
   }
 }
 
+/*----- Update the disabled state of the holdButton -----*/
+function updateHoldButtonState() {
+  if (parseInt(currentPlayer.currentScoreEl.textContent) <= 0) {
+    holdButton.disabled = true;
+  } else {
+    holdButton.disabled = false;
+  }
+}
+
+/*----- Flag variable to track the reset state-----*/
+let isResetting = false;
+
 /*----- Roll Button functionality -----*/
 rollButton.addEventListener("click", function () {
+  if (isResetting) {
+    return;
+  }
   diceImgReset();
   diceEl.classList.remove("hidden");
   currentPlayer.sectionEl.classList.add("current-turn-effect");
@@ -190,18 +210,32 @@ rollButton.addEventListener("click", function () {
 
   const resetDice = DICE_LOOKUP.dice1.img;
   if (diceImg === resetDice) {
-    
     currentPlayer.currentScoreEl.textContent = 0;
     currentPlayer.sectionEl.classList.remove("current-turn-effect");
-    currentPlayer = currentPlayer === player1 ?  player2 : player1;
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+    
     currentPlayer.sectionEl.classList.add("current-turn-effect");
     
-    
+    updateHoldButtonState();
+
+    isResetting = true; 
+    rollButton.disabled = true;
+    rollButton.classList.add("disabled");
+
+    setTimeout(function () {
+      diceImgScoreReset();
+      isResetting = false;
+      rollButton.disabled = false;
+      rollButton.classList.remove("disabled");
+    }, 1000);
   }
 });
 
 /*----- Hold Button functionality -----*/
 holdButton.addEventListener("click", function () {
+  if (isResetting) {
+    return; // Exit the function if the dice is still resetting
+  }
   diceImgReset();
   currentPlayer.scoreEl.textContent =
     Number(currentPlayer.scoreEl.textContent) +
@@ -217,12 +251,42 @@ holdButton.addEventListener("click", function () {
     currentPlayer = currentPlayer === player1 ? player2 : player1;
     currentPlayer.sectionEl.classList.add("current-turn-effect");
   }
+  updateHoldButtonState();
+
+  isResetting = true; 
+  rollButton.disabled = true;
+  rollButton.classList.add("disabled");
+
+  setTimeout(function () {
+    diceImgScoreReset();
+    isResetting = false;
+    rollButton.disabled = false;
+    rollButton.classList.remove("disabled");
+  }, 1000);
 });
 
+updateHoldButtonState();
+
+// MutationObserver for currentScoreEl elements
+const observerConfig = { childList: true, subtree: true };
+const observerCallback = function (mutationsList) {
+  for (const mutation of mutationsList) {
+    if (mutation.type === "childList") {
+      updateHoldButtonState();
+    }
+  }
+};
+
+const currentPlayerObserver = new MutationObserver(observerCallback);
+const opponentPlayerObserver = new MutationObserver(observerCallback);
+
+currentPlayerObserver.observe(player1CurrentScoreEl, observerConfig);
+opponentPlayerObserver.observe(player2CurrentScoreEl, observerConfig);
 /*----- New Game functionality -----*/
 newGameButton.addEventListener("click", function () {
   newGame();
   enableButtons();
+  diceImgScoreReset();
   currentPlayer.sectionEl.classList.remove("current-turn-effect");
   currentPlayer.scoreEl.textContent = 0;
   if (currentPlayer.headingEl.textContent === "WINNER!") {
@@ -232,4 +296,8 @@ newGameButton.addEventListener("click", function () {
     resetValues();
     currentPlayer = player1;
   }
+  updateHoldButtonState();
 });
+
+/*----- Initial setup -----*/
+updateHoldButtonState();

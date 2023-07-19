@@ -178,20 +178,46 @@ button {
   border-radius: 10px;
   color: rgb(219, 137, 240);
 }
+
+.hold-btn:disabled {
+  background-color: #29082f; 
+}
+
+.roll-btn.disabled {
+  background-color: #29082f;
+}
+
 .roll-icon {
   position: absolute;
   height: 10px;
   width: 100px;
 }
 
+
+
 img {
   position: absolute;
-  max-height: 400px;
-  max-width: 400px;
-  bottom: 55%;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-height: 360px;
+  max-width: 360px;
+  bottom: 60%;
   left: 50%;
   transform: translate(-50%, 50%);
 }
+
+.retro {
+  text-transform: uppercase;
+  background-color: rgb(167, 51, 124);
+  padding: 0.75rem 1rem; border-radius: 0.25rem;
+  border: solid 0.125rem #121212; box-shadow: 0.25rem 0.25rem #121212;
+  transition:
+  transform 50ms, box-shadow 50ms 
+  }
+
+  .retro:active {
+  transform: translate(0.125rem, 0.125rem); box-shadow: 0.125rem 0.125rem #000000;
+  }
 
 @media only screen and (max-width: 600px) {
     #title-starter-page  {
