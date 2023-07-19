@@ -12,8 +12,12 @@ html {
 
 body {
   height: 100%;
-  background: url(https://raw.githubusercontent.com/motech99/pass-the-pigs/main/imgs/background-main.png) center;
-  background-size: cover;
+  background: url(https://raw.githubusercontent.com/motech99/pass-the-pigs/main/imgs/background-main.png);   
+  background-repeat: no-repeat;
+  background-size: 100% 100%;;
+  background-position: center;
+ 
+
   font-size: 40px;
   display: flex;
   justify-content: center;

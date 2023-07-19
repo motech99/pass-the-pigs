@@ -146,6 +146,11 @@ function diceImgReset() {
   diceEl.style.visibility = "visible";
 }
 
+/*----- Dice Image reset function -----*/
+function diceImgScoreReset() {
+  diceEl.style.visibility = "hidden";
+}
+
 /*----- disable/Enable Buttons function -----*/
 function disableButtons() {
   rollButton.disabled = true;
@@ -185,10 +190,13 @@ rollButton.addEventListener("click", function () {
 
   const resetDice = DICE_LOOKUP.dice1.img;
   if (diceImg === resetDice) {
+    
     currentPlayer.currentScoreEl.textContent = 0;
     currentPlayer.sectionEl.classList.remove("current-turn-effect");
-    currentPlayer = currentPlayer === player1 ? player2 : player1;
+    currentPlayer = currentPlayer === player1 ?  player2 : player1;
     currentPlayer.sectionEl.classList.add("current-turn-effect");
+    
+    
   }
 });
 
