@@ -12,9 +12,9 @@ html {
 
 body {
   height: 100%;
-  background: url(https://github.com/motech99/pass-the-pigs/blob/main/imgs/background-main.png?raw=true);   
+  background: url(/images/background-main.png);   
   background-repeat: no-repeat;
-  background-size: 100% 100%;;
+  background-size: 100% 100%;
   background-position: center;
  
 
@@ -192,8 +192,6 @@ button {
   height: 10px;
   width: 100px;
 }
-
-
 
 img {
   position: absolute;
