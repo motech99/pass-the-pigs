@@ -178,7 +178,7 @@ function getRandomDICE() {
   const dice = Object.keys(DICE_LOOKUP);
   // made it harder to play the game as
   // there is a HIGHER chance of landing on 1
-  if (Math.random() < 0) {
+  if (Math.random() < 0.25) {
     return dice[0];
   } else {
     const randomIdx = Math.floor(Math.random() * (dice.length - 1)) + 1;
