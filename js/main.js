@@ -152,7 +152,13 @@ function diceImgReset() {
 /*----- Dice Image reset function -----*/
 function diceImgScoreReset() {
   diceEl.src = "./images/dice-0.png";
-  diceEl.style.visibility = "visible";
+
+  // Hide the dice element immediately if the game is won
+  if (currentPlayer.headingEl.textContent === "WINNER!") {
+    diceEl.style.visibility = "hidden";
+  } else {
+    diceEl.style.visibility = "visible";
+  }
 }
 
 /*----- disable/Enable Buttons function -----*/
@@ -172,7 +178,7 @@ function getRandomDICE() {
   const dice = Object.keys(DICE_LOOKUP);
   // made it harder to play the game as
   // there is a HIGHER chance of landing on 1
-  if (Math.random() < 0.3) {
+  if (Math.random() < 0) {
     return dice[0];
   } else {
     const randomIdx = Math.floor(Math.random() * (dice.length - 1)) + 1;
@@ -283,21 +289,30 @@ const opponentPlayerObserver = new MutationObserver(observerCallback);
 currentPlayerObserver.observe(player1CurrentScoreEl, observerConfig);
 opponentPlayerObserver.observe(player2CurrentScoreEl, observerConfig);
 /*----- New Game functionality -----*/
+/*----- Hold Button functionality -----*/
 newGameButton.addEventListener("click", function () {
   newGame();
   enableButtons();
-  diceImgScoreReset();
   currentPlayer.sectionEl.classList.remove("current-turn-effect");
   currentPlayer.scoreEl.textContent = 0;
+
   if (currentPlayer.headingEl.textContent === "WINNER!") {
+    currentPlayer.headingEl.textContent = "player 1"; // Reset the heading
     resetValues();
     currentPlayer = player1;
+    diceEl.style.visibility = "hidden"; // Hide the dice element immediately
   } else {
+    currentPlayer.headingEl.textContent = "player 2"; // Reset the heading
     resetValues();
     currentPlayer = player1;
+    diceImgScoreReset(); // Reset dice image (regardless of winner state)
+    diceEl.style.visibility = "visible"; // Show the dice element
   }
+
   updateHoldButtonState();
 });
+
+
 
 /*----- Initial setup -----*/
 updateHoldButtonState();
