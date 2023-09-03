@@ -5,15 +5,6 @@ The objective of this game is to be the first player to reach **100 points**. In
 ## Link for the Game
 You can play the game online by visiting the following link: [Pass The Pigs](https://motech99.github.io/pass-the-pigs/#)
 
-
-## Screenshots
-![1](https://i.imgur.com/yK00zfn.png) 
-![2](https://i.imgur.com/TJadxOf.png) 
-![3](https://i.imgur.com/GI73m8M.png) 
-![4](https://i.imgur.com/CNPLLUi.png) 
-
-
-
 ## Rules:
 1. The game is played by two players taking turns.
 
@@ -32,6 +23,13 @@ You can play the game online by visiting the following link: [Pass The Pigs](htt
 7. The game continues until a player reaches the winning score.
 
 Remember, don't get too greedy and risk losing your accumulated points by rolling a one. Wait until the dice is reset before taking your turn. Good luck and enjoy playing Pass the Pigs!
+
+## Screenshots
+![1](https://i.imgur.com/yK00zfn.png) 
+![2](https://i.imgur.com/TJadxOf.png) 
+![3](https://i.imgur.com/GI73m8M.png) 
+![4](https://i.imgur.com/CNPLLUi.png) 
+
 
 ## Attributions
  
